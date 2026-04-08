@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damir Ostrizniy | Premium Portfolio & LV12</title>
+
+    <!-- Moderni fontovi -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           KRITERIJ 11: NAPREDNI OSOBNI DIZAJN S TEMAMA
+           ========================================================= */
+        :root {
+            /* Light Theme */
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary: #0ea5e9;
+            --accent: #10b981;
+            --border: #e2e8f0;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            --nav-bg: rgba(255, 255, 255, 0.85);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #94a3b8;
+            --text-heading: #f8fafc;
+            --primary: #6366f1;
+            --primary-hover: #818cf8;
+            --secondary: #38bdf8;
+            --border: #334155;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            --nav-bg: rgba(30, 41, 59, 0.85);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 { color: var(--text-heading); font-weight: 600; }
+        a { color: var(--primary); text-decoration: none; font-weight: 500; }
+        a:hover { color: var(--primary-hover); text-decoration: underline; }
+
+        /* KRITERIJ 7: LAKO SNALAŽENJE (Glassmorphism Navigacija) */
+        header {
+            position: sticky; top: 0; z-index: 1000;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px; margin: 0 auto; padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--text-heading); letter-spacing: 1px; }
+        .logo span { color: var(--primary); }
+
+        nav { display: flex; align-items: center; gap: 20px; }
+        nav ul { list-style: none; display: flex; gap: 10px; }
+        
+        .nav-btn {
+            background: transparent; border: none; color: var(--text-main);
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 500;
+            padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+        }
+        .nav-btn:hover { background: rgba(99, 102, 241, 0.1); color: var(--primary); }
+        .nav-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3); }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--text-heading); padding: 8px 12px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Glavni sadržaj */
+        main { max-width: 1200px; margin: 40px auto; padding: 0 20px; min-height: 80vh; }
+        
+        .page { display: none; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .page.active { display: block; }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Kartice i komponente */
+        .card {
+            background: var(--bg-card); border-radius: 16px; padding: 35px;
+            margin-bottom: 30px; box-shadow: var(--card-shadow); border: 1px solid var(--border);
+        }
+        
+        .card-title {
+            font-size: 1.8rem; margin-bottom: 25px; padding-bottom: 10px;
+            border-bottom: 2px solid rgba(99, 102, 241, 0.2); display: inline-block;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        
+        .badge {
+            background: rgba(16, 185, 129, 0.1); color: var(--accent);
+            padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+        }
+
+        /* Upozorenja / Info blokovi */
+        .info-box {
+            background: rgba(14, 165, 233, 0.05); border-left: 4px solid var(--secondary);
+            padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 20px;
+        }
+
+        /* KRITERIJ 10: Slike */
+        img { max-width: 100%; height: auto; object-fit: cover; border-radius: 12px; }
+        .img-shadow { box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+
+        /* KRITERIJ 14: Tablice i liste */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; border-radius: 10px; overflow: hidden; }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: rgba(99, 102, 241, 0.05); color: var(--text-heading); font-weight: 600; }
+        tr:hover { background: rgba(99, 102, 241, 0.02); }
+        
+        ul.styled-list { padding-left: 20px; margin-top: 10px; }
+        ul.styled-list li { margin-bottom: 8px; position: relative; }
+
+        /* KRITERIJ 13: VJEŽBA LV17 - Izolirani kontejner točno po zadatku */
+        .lv17-wrapper {
+            position: relative; height: 500px; width: 100%;
+            background: linear-gradient(to bottom right, #cdffc1, #a6cfff);
+            font-family: Arial, sans-serif; border-radius: 16px;
+            overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+            margin: 25px 0; border: 1px solid var(--border);
+        }
+        
+        .lv17-wrapper .citat {
+            position: absolute; padding: 20px; width: 280px;
+            border-radius: 10px; box-sizing: border-box; margin: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); transition: transform 0.3s;
+        }
+        .lv17-wrapper .citat:hover { transform: translateY(-5px); }
+        
+        .lv17-wrapper .prvi { background-color: rgba(52, 219, 80, 0.85); color: #ffffff; font-family: "Courier New", monospace; font-size: 16px; }
+        .lv17-wrapper .jedan { top: 20px; left: 20px; }
+        .lv17-wrapper .dva { bottom: 20px; left: 20px; }
+        
+        .lv17-wrapper .drugi {
+            background-image: repeating-linear-gradient(45deg, #fef6e4, #fef6e4 10px, #f3d2c1 10px, #f3d2c1 20px);
+            color: #001858; font-style: italic; font-size: 16px; font-weight: 600;
+        }
+        .lv17-wrapper .tri { top: 15%; right: 5%; }
+        .lv17-wrapper .cetiri { top: 55%; right: 5%; }
+
+        footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); margin-top: 60px; color: var(--text-main); }
+
+        /* Responzivnost */
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .nav-container { flex-direction: column; gap: 15px; }
+            nav ul { flex-wrap: wrap; justify-content: center; }
+            .lv17-wrapper { height: 750px; }
+            .lv17-wrapper .tri, .lv17-wrapper .cetiri { position: relative; top: auto; right: auto; left: 20px; margin-top: 160px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGACIJA -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">D.O. <span>Portfolio</span></div>
+            <nav>
+                <ul>
+                    <li><button onclick="switchTab('tab1', this)" class="nav-btn active">1. Istraživanje & SJWP</button></li>
+                    <li><button onclick="switchTab('tab2', this)" class="nav-btn">2. Rezultati & Edukacija</button></li>
+                    <li><button onclick="switchTab('tab3', this)" class="nav-btn">3. O Autoru</button></li>
+                </ul>
+                <button class="theme-toggle" onclick="toggleTheme()" title="Promijeni temu">🌓</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- =========================================================
+             STRANICA 1: UVOD U ISTRAŽIVANJE (LV12) & SJWP VJEŽBE
+             ========================================================= -->
+        <section id="tab1" class="page active">
+            
+            <!-- KRITERIJ 15: Istraživanje LV12 -->
+            <div class="card">
+                <span class="badge">Projekt LV12</span>
+                <h1 class="card-title" style="margin-top: 10px;">Istraživanje: Korištenje AI alata u nastavi</h1>
+                <p>Dobrodošli! Ova stranica je izrađena kao rješenje praktičnog zadatka iz Skriptnih jezika i web programiranja. Tema mog istraživanja fokusirana je na moderne tehnologije.</p>
+                
+                <div class="grid-2" style="margin-top: 30px;">
+                    <div class="info-box">
+                        <h3>📋 Metodologija</h3>
+                        <ul class="styled-list">
+                            <li><strong>Broj sudionika:</strong> 60 učenika srednje škole</li>
+                            <li><strong>Spol sudionika:</strong> 35 mladića, 25 djevojaka</li>
+                            <li><strong>Vrijeme provođenja:</strong> Prosinac 2025.</li>
+                            <li><strong>Razlog:</strong> Provjera utjecaja ChatGPT-a i sličnih alata na samostalnost u rješavanju domaćih zadaća iz STEM predmeta.</li>
+                        </ul>
+                    </div>
+                    <div class="info-box" style="background: rgba(16, 185, 129, 0.05); border-left-color: var(--accent);">
+                        <h3>💡 Početna Hipoteza</h3>
+                        <p style="font-size: 1.1rem; font-style: italic; color: var(--text-heading);">"Smatramo da više od 70% učenika redovito koristi umjetnu inteligenciju za pisanje zadaća, što im dnevno štedi minimalno 45 minuta vremena."</p>
+                        <p style="margin-top: 10px;"><strong>Objašnjenje:</strong> Zbog dostupnosti alata i težine gradiva, učenici pribjegavaju brzim rješenjima, što mijenja tradicionalni koncept učenja.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KRITERIJ 2 & 8: SJWP Korisne poveznice i Vježbe -->
+            <div class="card">
+                <h2 class="card-title">Skriptni jezici i web programiranje (SJWP)</h2>
+                <p>Ovdje su izlistane odrađene vježbe, teorijska saznanja i praktični primjeri.</p>
+
+                <div class="grid-2" style="margin-top: 25px;">
+                    <div>
+                        <h3>Korisne poveznice za učenje</h3>
+                        <ul class="styled-list">
+                            <li><a href="https://www.w3schools.com/css/" target="_blank">W3Schools CSS</a> - Osnovni tutorijali za stiliziranje.</li>
+                            <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout" target="_blank">MDN Web Docs (Grid)</a> - Napredno pozicioniranje.</li>
+                            <li><a href="https://fonts.google.com/" target="_blank">Google Fonts</a> - Besplatni moderni fontovi.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Teorija iz vježbi (LV16 i LV18)</h3>
+                        <ul class="styled-list">
+                            <li><strong>LV16:</strong> <code>ID</code> započinje slovom ili brojem (koristi se jednom), a <code>Klasa</code> započinje slovom, crticom ili podvlakom (za više elemenata).</li>
+                            <li><strong>LV18:</strong> Obitelji fontova dijele se na <i>serif</i>, <i>sans-serif</i> i <i>monospace</i>. Podešavaju se putem <code>font-family</code> i <code>font-size</code> atributa.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- KRITERIJ 13: Renderirana vježba LV17 -->
+                <h3 style="margin-top: 40px;">Praktični rad: CSS Pozadine i apsolutno pozicioniranje (LV17)</h3>
+                <p>Ovaj blok sadrži izolirani, uživo renderirani kod točno iz vježbe LV17 koristeći RGBA boje i gradijente.</p>
+                
+                <div class="lv17-wrapper">
+                    <div class="citat prvi jedan">
+                        <p>„Život nije problem koji treba riješiti, već stvarnost koju treba živjeti.“</p>
+                    </div>
+                    <div class="citat prvi dva">
+                        <p>„Na kraju se ne broje godine u tvom životu, već život u tvojim godinama.“</p>
+                    </div>
+                    <div class="citat drugi tri">
+                        <p>„Život je ono što se događa dok mi pravimo druge planove.“</p>
+                    </div>
+                    <div class="citat drugi cetiri">
+                        <p>„Ne boj se sporog hoda, boj se stajanja.“</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             STRANICA 2: REZULTATI ISTRAŽIVANJA I OSTALI PREDMETI
+             ========================================================= -->
+        <section id="tab2" class="page">
+            
+            <!-- Rezultati LV12 -->
+            <div class="card">
+                <h2 class="card-title">Pregledni rezultati istraživanja (LV12)</h2>
+                <p>Obrada ankete u Excelu iznjedrila je zanimljive statističke podatke.</p>
+                
+                <div class="grid-2" style="margin-top: 25px; align-items: center;">
+                    <div>
+                        <!-- KRITERIJ 10: Slika grafa bez izobličenja -->
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Grafikon statistike" class="img-shadow">
+                        <p style="font-size: 0.85rem; color: #64748b; text-align: center; margin-top: 10px;">Grafikon 1: Postotak korištenja AI alata po danima.</p>
+                    </div>
+                    <div>
+                        <h3>Interpretacija rezultata</h3>
+                        <ul class="styled-list">
+                            <li><strong>75% učenika</strong> priznaje korištenje AI alata najmanje 3 puta tjedno.</li>
+                            <li>Prosječna ušteda vremena iznosi <strong>52 minute dnevno</strong>.</li>
+                            <li>Najviše se koristi za programiranje i pisanje eseja iz jezika.</li>
+                        </ul>
+                        <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent); padding: 15px; border-radius: 8px; margin-top: 20px;">
+                            <strong style="color: var(--accent);">ZAKLJUČAK:</strong> Početna hipoteza je u potpunosti <strong>potvrđena</strong>! Učenici se masovno oslanjaju na tehnologiju.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KRITERIJ 14: Tablični prikaz rezultata -->
+                <h3 style="margin-top: 30px;">Detaljna distribucija po predmetima</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Školski Predmet</th>
+                            <th>Najčešći AI alat</th>
+                            <th>Postotak učenika</th>
+                            <th>Ušteda vremena (min)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Informatika / SJWP</td>
+                            <td>ChatGPT / Claude</td>
+                            <td>85%</td>
+                            <td>60 min</td>
+                        </tr>
+                        <tr>
+                            <td>Engleski jezik</td>
+                            <td>Grammarly / DeepL</td>
+                            <td>70%</td>
+                            <td>45 min</td>
+                        </tr>
+                        <tr>
+                            <td>Matematika</td>
+                            <td>Photomath</td>
+                            <td>65%</td>
+                            <td>30 min</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- KRITERIJ 1, 3 i 5: Ostali predmeti, linkovi i Seminar -->
+            <div class="card">
+                <h2 class="card-title">Ostali predmeti i materijali</h2>
+                
+                <div class="grid-2">
+                    <!-- Engleski i Seminar -->
+                    <div style="border: 1px solid var(--border); padding: 25px; border-radius: 12px; background: rgba(99, 102, 241, 0.02);">
+                        <h3 style="display: flex; align-items: center; gap: 10px;">🇬🇧 Engleski Jezik</h3>
+                        <ul class="styled-list">
+                            <li><a href="https://learnenglish.britishcouncil.org/" target="_blank">British Council</a></li>
+                            <li><a href="https://www.bbc.co.uk/learningenglish/" target="_blank">BBC Learning English</a></li>
+                        </ul>
+                        
+                        <!-- KRITERIJ 5: Objavljen esej -->
+                        <div style="margin-top: 20px; background: var(--bg-card); padding: 15px; border-radius: 8px; border-left: 4px solid var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                            <span class="badge" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">Objavljen Esej</span>
+                            <h4 style="margin: 10px 0 5px 0;">The Impact of Social Media on Teenagers</h4>
+                            <p style="font-size: 0.9rem; font-style: italic;">"Social media platforms have fundamentally altered interpersonal communication among adolescents. While they offer unprecedented connectivity, studies link excessive usage to anxiety..."</p>
+                            <p style="font-size: 0.85rem; margin-top: 10px; font-weight: bold;">Ocjena: Odličan (5)</p>
+                        </div>
+                    </div>
+
+                    <!-- Matematika -->
+                    <div style="border: 1px solid var(--border); padding: 25px; border-radius: 12px; background: rgba(14, 165, 233, 0.02);">
+                        <h3 style="display: flex; align-items: center; gap: 10px;">📐 Matematika</h3>
+                        <ul class="styled-list">
+                            <li><a href="https://www.khanacademy.org/math" target="_blank">Khan Academy - Math</a></li>
+                            <li><a href="https://www.geogebra.org/" target="_blank">GeoGebra Interaktivni Alati</a></li>
+                        </ul>
+                        <div style="margin-top: 20px; background: var(--bg-card); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                            <h4>Zadatak tjedna (Trigonometrija)</h4>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">Riješi jednadžbu: <code>2 sin(x) * cos(x) = 1</code> na intervalu [0, 2π].</p>
+                            <p style="font-size: 0.85rem; color: var(--accent); font-weight: bold; margin-top: 5px;">Rješenje: x = π/4, 5π/4</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             STRANICA 3: O AUTORU, CERTIFIKATI, ZAPISNIK
+             ========================================================= -->
+        <section id="tab3" class="page">
+            
+            <!-- KRITERIJ 4: O Autoru (Treća stranica LV12) -->
+            <div class="card">
+                <h2 class="card-title">Profil Autora</h2>
+                
+                <div class="grid-2" style="align-items: center;">
+                    <div style="text-align: center;">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Portret autora" class="img-shadow" style="width: 250px; height: 250px; border-radius: 50%; border: 6px solid var(--bg-main);">
+                    </div>
+                    <div>
+                        <h1 style="color: var(--primary); font-size: 2.2rem; margin-bottom: 5px;">Damir Ostrizniy</h1>
+                        <p style="font-size: 1.1rem; color: var(--secondary); font-weight: 500; margin-bottom: 20px;">Web Developer Entuzijast | 3.B Razred</p>
+                        
+                        <ul class="styled-list" style="list-style: none; padding: 0;">
+                            <li>📅 <strong>Datum rođenja:</strong> 15. svibnja 2008.</li>
+                            <li>📍 <strong>Adresa:</strong> Vukovarska ulica 10, Zagreb</li>
+                            <li>🏫 <strong>Škola:</strong> Tehnička škola (Računalstvo)</li>
+                        </ul>
+                        
+                        <p style="margin-top: 20px;"><strong>Stručna biografija:</strong><br>
+                        Već tri godine se strastveno bavim web programiranjem i dizajnom korisničkih sučelja (UI/UX). Posjedujem napredno znanje HTML-a, CSS-a (uključujući Grid i Flexbox) i JavaScripta. Moja ambicija je upisati Fakultet elektrotehnike i računarstva (FER).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KRITERIJ 12: Certifikati -->
+            <div class="card">
+                <h2 class="card-title">Osobni certifikati i postignuća</h2>
+                <p>Nabrajanje relevantnih uspjeha i diploma van redovne nastave:</p>
+                
+                <div class="grid-2" style="margin-top: 20px;">
+                    <div style="padding: 20px; border: 1px solid var(--border); border-radius: 10px; display: flex; gap: 15px;">
+                        <div style="font-size: 2.5rem;">📜</div>
+                        <div>
+                            <h4>W3Schools CSS Certified</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-main);">Službeni certifikat o poznavanju responzivnog web dizajna i CSS3 standarda. (2025)</p>
+                        </div>
+                    </div>
+                    <div style="padding: 20px; border: 1px solid var(--border); border-radius: 10px; display: flex; gap: 15px;">
+                        <div style="font-size: 2.5rem;">🥇</div>
+                        <div>
+                            <h4>Natjecanje iz Informatike (Županijsko)</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-main);">Osvojeno 3. mjesto u kategoriji Razvoj softvera s timskim projektom. (2024)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KRITERIJ 6: Zapisnik iz radionice -->
+            <div class="card">
+                <h2 class="card-title">Zapisnik s radionice (LV 13a)</h2>
+                <div style="font-family: 'Courier New', monospace; background: var(--bg-main); padding: 25px; border-radius: 8px; border-left: 5px solid var(--text-heading);">
+                    <strong>ZAPISNIK - RADIONICA LV 13A</strong><br><br>
+                    <strong>Datum:</strong> 15.01.2026. | <strong>Lokacija:</strong> Kabinet za računalstvo<br>
+                    <strong>Tema:</strong> Izrada kompleksnih HTML obrazaca i responzivnost.<br>
+                    ---------------------------------------------------<br>
+                    <strong>Tijek radionice:</strong><br>
+                    1. Teorijski uvod o "input" tipovima (email, password, date).<br>
+                    2. Samostalni rad: Izrada registracijske forme.<br>
+                    3. Implementacija CSS Grid sustava za poravnanje polja.<br>
+                    <br>
+                    <strong>Zaključak:</strong> Učenik Damir Ostrizniy je uspješno izradio obrazac koji je 100% responzivan na mobilnim uređajima, te ga validirao unutar preglednika.<br>
+                    <strong>Potpis:</strong> <em>D.O.</em>
+                </div>
+            </div>
+
+            <!-- Tjedni raspored (Dodatna Tablica za Kriterij 14) -->
+            <div class="card">
+                <h2 class="card-title">Osobni raspored aktivnosti</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dan</th>
+                            <th>Jutro (Škola)</th>
+                            <th>Popodne (Hobiji)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ponedjeljak</td>
+                            <td>Programiranje, Mat, Fiz</td>
+                            <td>Teretana / Učenje C++</td>
+                        </tr>
+                        <tr>
+                            <td>Srijeda</td>
+                            <td>SJWP (Vježbe), Engleski</td>
+                            <td>Izrada Web portfolia</td>
+                        </tr>
+                        <tr>
+                            <td>Petak</td>
+                            <td>Baze podataka, Hrvatski</td>
+                            <td>Druženje s prijateljima</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>Izradio: Damir Ostrizniy, 3.B</strong></p>
+        <p style="font-size: 0.9rem; margin-top: 5px;">Mrežno sjedište dizajnirano HTML5, CSS3 tehnologijama uz dodatak JavaScript logike. Sva prava pridržana &copy; 2026.</p>
+    </footer>
+
+    <!-- LOGIKA ZA TABS I DARK MODE -->
+    <script>
+        // Tab navigacija (Simulacija 3 stranice za LV12)
+        function switchTab(tabId, btn) {
+            // Makni active sa svih stranica
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Dodaj active na odabranu stranicu
+            document.getElementById(tabId).classList.add('active');
+            
+            // Makni active sa svih gumbova
+            document.querySelectorAll('.nav-btn').forEach(button => {
+                button.classList.remove('active');
+            });
+            // Dodaj active na stisnuti gumb
+            btn.classList.add('active');
+
+            // Glatki skok na vrh prilikom prebacivanja stranice
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Dark/Light Mode sustav
+        function toggleTheme() {
+            const body = document.documentElement;
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                // Optional: spremiti u localStorage
+            } else {
+                body.setAttribute('data-theme', 'dark');
+            }
+        }
+    </script>
+
+</body>
+</html>
